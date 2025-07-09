@@ -11,38 +11,49 @@ The goal of these programming exercises is to practise:
 
 **<ins>Exercise 1</ins>**
 
-Analyse the following HTTP request:
+Complete a Java class that constructs `HttpRequest` objects with specific properties.
 
-```
-    GET https://www.google.com HTTP/1.1
-    Host: cs.unibg.it
-    User Agent: Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/124
-    (KHTML, like Gecko) Safari/125
-    Accept: ext/xml, application/xml, application/xhtml+xml, text/html;q=0.9,
-    text/plain;q=0.8, image/png,*,*;q=0.5
-    Accept-Language: it
-    Keep-Alive: 300
-    Connection: keep-alive
-```
+**Task:** Implement the `build()` method in the  `HttpRequestBuilder` class to return a configured [HttpRequest](https://docs.oracle.com/en/java/javase/21/docs/api/java.net.http/java/net/http/HttpRequest.html#newBuilder()) object. Use the [HttpRequest.build()](https://docs.oracle.com/en/java/javase/21/docs/api/java.net.http/java/net/http/HttpRequest.html#newBuilder()) method to create a [Builder](https://docs.oracle.com/en/java/javase/21/docs/api/java.net.http/java/net/http/HttpRequest.Builder.html) instance and build a request with the following properties:
 
-1. What is the requested URL?
-2. Which version of HTTP is used?
-3. Does the browser ask for a persistent or a non-persistent connection?
-4. What is, in your opinion, the utility in indicating the type (and version) of browser used by
-the client in the HTTP Request?
+- **Method:** GET
+- **HTTP Version:** HTTP_1_1  
+- **User-Agent:** "Mozilla/5.0 (Java Exercise Client)"
+- **Accept:** "text/html,application/json,*/*;q=0.8"
+- **Timeout:** 30 seconds
+
+**Example usage:**
+```java
+HttpRequest request = HttpRequestBuilder.build("https://www.example.com/api/data");
+
+System.out.println("Method: " + request.method());
+System.out.println("URI: " + request.uri());
+System.out.println("Headers: " + request.headers().map());
+```
 
 **<ins>Exercise 2</ins>**
 
-An HTTP client sends the following message:
+Complete a Java class that processes `HttpResponse` objects and extracts key information into a `Map`.
 
-```
-    GET http://cs.unibg.it /index.html HTTP/1.1
-    User-agent: Mozilla/4.0
-    Accept: text/html, image/gif, image/jpeg
-    If-modified-since: 27 Feb 2017 08:10:00
+**Task:** Implement the `parse()` method in the  `HttpResponseParser` class to return a `Map<String, String>` containing:
+
+- **"URL"**: Request URL (from the response's request)
+- **"Status"**: HTTP status code as a string
+- **"Server"**: Server header value (only if present)
+- **"Content-Type"**: Content-Type header value (only if present)
+- **"Content-Length"**: Content-Length header value (only if present)
+
+**Example usage:**
+```java
+Map<String, String> responseData = HttpResponseParser.parse(response);
+
+System.out.println("URL: " + responseData.get("URL"));
+System.out.println("Status: " + responseData.get("Status"));
+if (responseData.containsKey("Server")) {
+    System.out.println("Server: " + responseData.get("Server"));
+}
 ```
 
-Write down two feasible responses of the HTTP server (only the status line).
+**Note:** Use Java's built-in `java.net.http` package (available in Java 11+) for the `HttpRequest` and `HttpResponse` classes.
 
 ## :spider_web: HTML
 
@@ -76,6 +87,12 @@ To verify that your form is structured as expected, run the tests:
 
 ```shell
 ./mvnw clean test
+```
+
+To run the HTTP exercises demo:
+
+```shell
+./mvnw exec:java -Dexec.mainClass="com.cbfacademy.App"
 ```
 
 **Learn more:** [Anatomy of an HTML Document](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics#anatomy_of_an_html_document)
