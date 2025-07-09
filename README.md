@@ -1,27 +1,81 @@
-# Java Exercise Template
-This template repository is used to create autograded Java exercise repositories for CBF Academy bootcamps. It includes a GitHub Classroom autograding workflow that scores student submissions on functionality and code quality by executing unit tests and submitting the code changes for review by an automated agent.
+# Web Applications
 
-## Usage
+[![Language](https://img.shields.io/badge/language-HTML-E54B20.svg?style=for-the-badge)][1]
 
-1. Create a new repository for the exercise, with the following settings:
-    - Template: Select this repository
-    - Name: Use the `java-exercises-[exercise name]` naming convention, e.g. `java-exercises-spring-boot`
-    - Visibility: Public (needed for Classroom)
-2. After initialising, navigate to the repo settings and set as a template, so it can be used for assignments
-3. Commit README, Maven assets, starter code and unit tests to the main branch
-4. Create a solutions branch and commit any reference solutions code to it
-5. Modify the `MAX_TESTS` environment variable to reflect the total number of tests available
-6. Push all changes
+The goal of these programming exercises is to practise:
+- working with a web server
+- working with a web client
+- creating simple HTML pages
 
-## Testing
+## :globe_with_meridians: HTTP
 
-1. Create a new Classroom assignment using the exercise repo as the starter template, with the following settings
-   - Repository visibility: Private
-   - Grant students admin access to their repository: Disabled
-   - Copy the default branch only: Enabled
-   - Supported editor: Don't use an online IDE
-   - Protected file paths: `.github/**/*`, `**/test/**/*`
-   - Enable feedback pull requests: Enabled
-2. Accept the assignment from a test account.
-3. Commit and push
-4. Review the Actions output and Feedback PR comment to ensure everything operates as expected
+**<ins>Exercise 1</ins>**
+
+Analyse the following HTTP request:
+
+```
+    GET https://www.google.com HTTP/1.1
+    Host: cs.unibg.it
+    User Agent: Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/124
+    (KHTML, like Gecko) Safari/125
+    Accept: ext/xml, application/xml, application/xhtml+xml, text/html;q=0.9,
+    text/plain;q=0.8, image/png,*,*;q=0.5
+    Accept-Language: it
+    Keep-Alive: 300
+    Connection: keep-alive
+```
+
+1. What is the requested URL?
+2. Which version of HTTP is used?
+3. Does the browser ask for a persistent or a non-persistent connection?
+4. What is, in your opinion, the utility in indicating the type (and version) of browser used by
+the client in the HTTP Request?
+
+**<ins>Exercise 2</ins>**
+
+An HTTP client sends the following message:
+
+```
+    GET http://cs.unibg.it /index.html HTTP/1.1
+    User-agent: Mozilla/4.0
+    Accept: text/html, image/gif, image/jpeg
+    If-modified-since: 27 Feb 2017 08:10:00
+```
+
+Write down two feasible responses of the HTTP server (only the status line).
+
+## :spider_web: HTML
+
+An [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) form is a section of the page that [collects input](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Basic_native_form_controls) from the user. The input from the user is generally sent to a server (web servers, mail clients, etc). We use the `<form>` element to create forms in HTML.
+
+### Form Structure
+
+Create a HTML form in [login.html](src/main/resources/login.html) with the following structure:
+
+#### Required Elements:
+
+Create a `<form>` element containing:
+- Three `<div>` elements containing:
+   1. An email-type `<input>` element with its id set to "email" and an external label
+   2. A password-type `<input>` with its id set to "password" and an external label
+   3. A checkbox-type input with its id set to "remember", inside a label and a "Forgot password" `<a>` element (you can use `#` for the href attribute)
+- A submit-type `<button>`
+
+#### Accessibility Requirements:
+- All inputs should have a `name` attribute defined
+- All inputs should have associated labels using `for` attributes or being wrapped by the associated label
+
+### Visual Reference
+![HTML Form](./html-form.png)
+
+**Note:** Styling for the form is provided, but you won't be graded on its appearance. Focus on the correct HTML structure and accessibility features.
+
+## :white_check_mark: Verify Your Implementation
+
+To verify that your form is structured as expected, run the tests:
+
+```shell
+./mvnw clean test
+```
+
+**Learn more:** [Anatomy of an HTML Document](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics#anatomy_of_an_html_document)
