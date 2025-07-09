@@ -1,6 +1,9 @@
 package com.cbfacademy;
 
+import java.net.URI;
+import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
+import java.time.Duration;
 
 /**
  * Exercise 1: HTTP Request Builder
@@ -18,6 +21,17 @@ public class HttpRequestBuilder {
      * @throws RuntimeException if the request cannot be built
      */
     public static HttpRequest build(String url) {
-        throw new UnsupportedOperationException("Not implemented");
+        try {
+            return HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .version(HttpClient.Version.HTTP_1_1)
+                .header("User-Agent", "Mozilla/5.0 (Java Exercise Client)")
+                .header("Accept", "text/html,application/json,*/*;q=0.8")
+                .timeout(Duration.ofSeconds(30))
+                .GET()
+                .build();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to build HTTP request for URL: " + url, e);
+        }
     }
 } 

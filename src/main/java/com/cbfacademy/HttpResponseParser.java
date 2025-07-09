@@ -1,6 +1,7 @@
 package com.cbfacademy;
 
 import java.net.http.HttpResponse;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -21,7 +22,15 @@ public class HttpResponseParser {
      * @return Map containing the extracted response information
      */
     public static Map<String, String> parse(HttpResponse<String> response) {
-        throw new UnsupportedOperationException("Not implemented");
+        Map<String, String> responseData = new HashMap<>();
+        
+        responseData.put("URL", response.request().uri().toString());
+        responseData.put("Status", String.valueOf(response.statusCode()));
+        addHeader(response, "Server", responseData);
+        addHeader(response, "Content-Type", responseData);
+        addHeader(response, "Content-Length", responseData);
+        
+        return responseData;
     }
     
     /**
