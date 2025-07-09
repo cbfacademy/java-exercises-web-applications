@@ -11,9 +11,9 @@ The goal of these programming exercises is to practise:
 
 **<ins>Exercise 1</ins>**
 
-Complete a Java class that constructs `HttpRequest` objects with specific properties.
+Complete a Java class that constructs [HttpRequest](https://docs.oracle.com/en/java/javase/21/docs/api/java.net.http/java/net/http/HttpRequest.html) objects with specific properties.
 
-**Task:** Implement the `build()` method in the  `HttpRequestBuilder` class to return a configured [HttpRequest](https://docs.oracle.com/en/java/javase/21/docs/api/java.net.http/java/net/http/HttpRequest.html#newBuilder()) object. Use the [HttpRequest.build()](https://docs.oracle.com/en/java/javase/21/docs/api/java.net.http/java/net/http/HttpRequest.html#newBuilder()) method to create a [Builder](https://docs.oracle.com/en/java/javase/21/docs/api/java.net.http/java/net/http/HttpRequest.Builder.html) instance and build a request with the following properties:
+**Task:** Implement the `build()` method in the  `HttpRequestBuilder` class to return a configured `HttpRequest` object. Use the [HttpRequest.newBuilder()](https://docs.oracle.com/en/java/javase/21/docs/api/java.net.http/java/net/http/HttpRequest.html#newBuilder()) method to create a [Builder](https://docs.oracle.com/en/java/javase/21/docs/api/java.net.http/java/net/http/HttpRequest.Builder.html) instance and build a request with the following properties:
 
 - **Method:** GET
 - **HTTP Version:** HTTP_1_1  
@@ -32,7 +32,7 @@ System.out.println("Headers: " + request.headers().map());
 
 **<ins>Exercise 2</ins>**
 
-Complete a Java class that processes `HttpResponse` objects and extracts key information into a `Map`.
+Complete a Java class that processes [HttpResponse](https://docs.oracle.com/en/java/javase/21/docs/api/java.net.http/java/net/http/HttpResponse.html) objects and extracts key information into a `Map`.
 
 **Task:** Implement the `parse()` method in the  `HttpResponseParser` class to return a `Map<String, String>` containing:
 
