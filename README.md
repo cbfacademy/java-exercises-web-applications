@@ -75,6 +75,7 @@ Create a `<form>` element containing:
 #### Accessibility Requirements:
 - All inputs should have a `name` attribute defined
 - All inputs should have associated labels using `for` attributes or being wrapped by the associated label
+- All text inputs should have a placeholder attribute to indicate the value that should be input
 
 ### Visual Reference
 ![HTML Form](./html-form.png)
