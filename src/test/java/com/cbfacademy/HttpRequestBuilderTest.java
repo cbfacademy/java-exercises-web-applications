@@ -76,7 +76,7 @@ public class HttpRequestBuilderTest {
 
         Optional<String> userAgent = request.headers().firstValue("User-Agent");
         assertTrue(userAgent.isPresent(), "User-Agent header should be present");
-        assertEquals("Mozilla/5.0 (Java Exercise Client)", userAgent.get(), 
+        assertEquals("Mozilla/5.0 (Java Exercise Client)", userAgent.get(),
                 "User-Agent should match expected value");
     }
 
@@ -88,7 +88,7 @@ public class HttpRequestBuilderTest {
 
         Optional<String> accept = request.headers().firstValue("Accept");
         assertTrue(accept.isPresent(), "Accept header should be present");
-        assertEquals("text/html,application/json,*/*;q=0.8", accept.get(), 
+        assertEquals("text/html,application/json,*/*;q=0.8", accept.get(),
                 "Accept header should match expected value");
     }
 
@@ -105,10 +105,10 @@ public class HttpRequestBuilderTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
-        "https://www.google.com",
-        "https://api.github.com/users",
-        "https://httpbin.org/get",
-        "https://example.com/path/to/resource?param=value"
+            "https://www.google.com",
+            "https://api.github.com/users",
+            "https://httpbin.org/get",
+            "https://example.com/path/to/resource?param=value"
     })
     @DisplayName("Should handle various URL formats correctly")
     void shouldHandleVariousUrlFormats(String url) {
@@ -126,13 +126,14 @@ public class HttpRequestBuilderTest {
         HttpRequest request = HttpRequestBuilder.build(testUrl);
 
         // Verify that both required headers are present
-        assertTrue(request.headers().firstValue("User-Agent").isPresent(), 
+        assertTrue(request.headers().firstValue("User-Agent").isPresent(),
                 "User-Agent header should be present");
-        assertTrue(request.headers().firstValue("Accept").isPresent(), 
+        assertTrue(request.headers().firstValue("Accept").isPresent(),
                 "Accept header should be present");
 
-        // Verify no restricted headers are set (Connection header should not be manually set)
-        assertFalse(request.headers().firstValue("Connection").isPresent(), 
+        // Verify no restricted headers are set (Connection header should not be
+        // manually set)
+        assertFalse(request.headers().firstValue("Connection").isPresent(),
                 "Connection header should not be manually set");
     }
 
@@ -148,4 +149,4 @@ public class HttpRequestBuilderTest {
         assertNotSame(request1, request2, "Different requests should be separate instances");
         assertNotEquals(request1.uri(), request2.uri(), "Different requests should have different URIs");
     }
-} 
+}
