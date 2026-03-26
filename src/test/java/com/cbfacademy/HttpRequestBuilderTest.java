@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -17,9 +20,24 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.MockedStatic;
 
 @DisplayName("HttpRequestBuilder Tests")
 public class HttpRequestBuilderTest {
+
+    @Test
+    @DisplayName("Should use HttpRequest.newBuilder() to construct the request")
+    void shouldCallHttpRequestNewBuilder() {
+        String testUrl = "https://example.com";
+
+        try (MockedStatic<HttpRequest> httpRequestMock = mockStatic(HttpRequest.class)) {
+            httpRequestMock.when(HttpRequest::newBuilder).thenCallRealMethod();
+            httpRequestMock.when(() -> HttpRequest.newBuilder(any(URI.class))).thenCallRealMethod();
+            HttpRequestBuilder.build(testUrl);
+
+            httpRequestMock.verify(HttpRequest::newBuilder, times(1));
+        }
+    }
 
     @Test
     @DisplayName("Should build HttpRequest with correct method")
