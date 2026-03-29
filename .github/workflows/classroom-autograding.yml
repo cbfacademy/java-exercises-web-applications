@@ -6,7 +6,16 @@ on:
       - main
 
 jobs:
+  pre-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if classroom token is set
+        id: check-token
+        run: |
+          echo "IS_CLASSROOM_REPO=${{ secrets.CLASSROOM_TOKEN != '' }}" >> $GITHUB_OUTPUT
+
   autograding:
+    needs: pre-check
+    if: needs.pre-check.outputs.IS_CLASSROOM_REPO == 'true'
     uses: cbfacademy/autograding-workflows/.github/workflows/classroom-autograding.yml@main
-    secrets:
-      CLASSROOM_TOKEN: ${{ secrets.CLASSROOM_TOKEN }}
+    secrets: inherit
